@@ -11,7 +11,7 @@ FOLSOM is basically just a single shell script, plus a lookup table (see below).
 
 I personally put the `FOLSOM.sh` file at `~/Applications/`.
 
-The `.FOLSOM-lookup.txt` should be placed in your home directory (again, details below).
+The `FOLSOM_lookup.txt` should be placed in your home directory and renamed with a dot at the start, to `.FOLSOM_lookup.txt` and (again, details below).
 
 You can create your own Automator quick action or modify the one included here. Read [Apple's guide to Automator quick actions here](https://support.apple.com/en-gb/guide/automator/aut73234890a/mac).
 
