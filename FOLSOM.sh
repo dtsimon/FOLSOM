@@ -1,11 +1,12 @@
 #! /bin/zsh
 
 # --------------------------------------------------------------------------------
+# FOLSOM: Fast OneDrive Links to Sharepoint On Mac
+#
 # Script to get the "share with existing access" url for a file synced locally
 # with OneDrive. Meant to work on personal and "shared-with-me" files
 #
-# Daniel Simon, daniel.simon@liu.se
-# 2024-02-22
+# https://github.com/dtsimon/FOLSOM
 # --------------------------------------------------------------------------------
 
 # The script is meant to start with a file path from a Finder action
