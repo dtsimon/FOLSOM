@@ -9,10 +9,6 @@
 # --------------------------------------------------------------------------------
 
 # The script is meant to start with a file path from a Finder action
-#inputPath="/Users/dansi08/Linköpings universitet/Bernhard Burtscher - IL6_Aptasensor_Chiara/OECT IL-6 aptasensor manuscript r3.docx"
-#inputPath="/Users/dansi08/Linköpings universitet/WISE - Documents/Mall - Överenskommelse vid gemensamt personuppgiftsansvar (2021-09-16).docx"
-#inputPath="/Users/dansi08/Linköpings universitet/WISE - Documents/1 Projekt/WISE-ip2 (WISE industry proj. 2)/2. Process-Utlysning/Utlysningstext WISE-ip2 v4.docx"
-#inputPath="/Users/dansi08/Library/CloudStorage/OneDrive-SharedLibraries-Linköpingsuniversitet/WISE - Documents/Mall - Överenskommelse vid gemensamt personuppgiftsansvar (2021-09-16).docx"
 inputPath=`readlink -f $1`
 
 # Check if the inputPath is synced through OneDrive
