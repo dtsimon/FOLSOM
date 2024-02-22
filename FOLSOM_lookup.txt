@@ -1,0 +1,7 @@
+# Sharepoint URL lookup table
+# Column 1: Sharename
+# Column separator: ;;;
+# Column 2: Intermediate path (between davUrlNamespace and relativePath)
+# NOTE: no starting slash, yes ending slash
+
+Sample share name;;;Intermediate/Path/
