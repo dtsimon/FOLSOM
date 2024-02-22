@@ -1,5 +1,5 @@
 # FOLSOM
-FOLSOM provides Fast OneDrive Links to Sharepoint On Mac
+FOLSOM provides <ins>F</ins>ast <ins>O</ins>neDrive <ins>L</ins>inks to <ins>S</ins>harepoint <ins>O</ins>n <ins>M</ins>ac.
 
 ## What does FOLSOM do?
 FOLSOM uses information that OneDrive stores locally on your Mac to generate share links (nearly) instantly... and copy them to the clipboard so you can paste into email, etc. What you get is a linked path on your clipboard, ready to paste into Mail.app, for example: 
