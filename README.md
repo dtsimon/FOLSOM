@@ -49,3 +49,7 @@ I just a hobbyist with minimal coding experience. The code is **not** great... o
 3. There's no automatic way to populate the lookup table. From what I can tell, this *would* require accessing the OneDrive API. Currently this is done by hand.
 4. I'm not sure how this would work if your system isn't set to English. The OneDrive settings folder may have a different name, and the share folders may have a name that doesn't contain "Shared".
 5. Probably many others I haven't discovered yet...
+
+## Acknowledgements
+The *.ini lookup of URL components is directly inspired by [guwidoe/GetLocalOneDrivePath.bas.vb](https://gist.github.com/guwidoe/038398b6be1b16c458365716a921814d), which finds the local folder location of an open cloud file in Word/Excel/PowerPoint.
+
