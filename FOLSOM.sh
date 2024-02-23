@@ -74,10 +74,10 @@ relativePath=`echo $localPathClean | sed "s|$onedriveRootFolderLocal/||g"`
 cd ~/"Library/Containers/com.microsoft.OneDrive-mac/Data/Library/Application Support/OneDrive/settings/Business1"
 libraryScope=`grep -E "^libraryScope.*\s5\s\"$onedriveRootSite\"\s" *.ini | sed "s|.*\"$onedriveRootSite\"||g" | awk '{print $3}'  | sed 's/\"//g'`
 davUrlNamespace=`grep -hF $libraryScope *.ini | grep -E "DavUrlNamespace" | sed 's|DavUrlNamespace = ||g'`
+userName=`grep -E "MySite" *.ini | sed "s|.*personal/||g" | sed "s|\"\ .*||g"`
 
 # Check if the Sharepoint URL is a "site" (Team or Sharepoint) or "personal" (user's OneDrive)
-if [[ $davUrlNamespace == *"personal"* ]] && [[ "$davUrlNamespace" != *"dansi08"* ]]; then
-
+if [[ $davUrlNamespace == *"personal"* ]] && [[ "$davUrlNamespace" != *$userName* ]]; then
     # The URL is pointing toward a personal OneDrive share
     # need to get the intermediate folder structure
     # from lookup table or interactively
@@ -85,17 +85,17 @@ if [[ $davUrlNamespace == *"personal"* ]] && [[ "$davUrlNamespace" != *"dansi08"
     if [[ $lookupCount -ne 1 ]]; then
         # the personal share wasn't found in the lookup table
         # alert the user with Applescript
-        osascript -e "set dialogText to \"The file you selected is shared through a personal OneDrive folder, but the intermediate URL for share [$onedriveRootSite - $onedriveRootShare] was not found in ~/.FOLSOM_lookup.txt. The output path will not contain an active link.\"" \
+        osascript -e "set dialogText to \"The file you selected is shared through a personal OneDrive folder, but the intermediate URL for share [$onedriveRootFolderLocal] was not found in ~/.FOLSOM_lookup.txt. The output path will not contain an active link.\"" \
             -e "set dialogResult to display dialog dialogText with icon caution buttons {\"Cancel\", \"Open file\"} default button \"Cancel\"" \
             -e "if button returned of dialogResult is \"Open file\" then" \
-            -e "   do shell script \"echo \\\"$onedriveRootShare(;;;(put intermediate path here and remove all parentheses))\\\" >> ~/.FOLSOM_lookup.txt; open -e ~/.FOLSOM_lookup.txt\"" \
+            -e "   do shell script \"echo \\\"$onedriveRootFolderLocal(;;;(put intermediate path here and remove all parentheses))\\\" >> ~/.FOLSOM_lookup.txt; open -e ~/.FOLSOM_lookup.txt\"" \
             -e "end if"
         #End the script here, with the cleaned-up path, but no active link
         outputPath=`echo $localPathClean | sed 's|^/||g' | sed 's|/| > |g'`
         osascript -e "set the clipboard to \""$outputPath"\""
         return 0
     fi
-    intermediatePath=`grep -F $onedriveRootShare ~/.FOLSOM_lookup.txt | sed "s|$onedriveRootShare;;;||g"`
+    intermediatePath=`grep -F $onedriveRootFolderLocal ~/.FOLSOM_lookup.txt | sed "s|$onedriveRootFolderLocal;;;||g"`
 fi
 
 # Generate the full share link

@@ -7,9 +7,9 @@ FOLSOM uses information that OneDrive stores locally on your Mac to generate sha
 **User - Documents > Project folder 1 > Sub-project fantastic > [Secret plans.docx](https://www.youtube.com/watch?v=fcMl1oOVrMk)**
 
 ## INSTALL and how to use
-FOLSOM is basically just a single shell script, plus a lookup table (see below). There's also a sample Automator quickaction so you can run it from the Finder context menu.
+FOLSOM is basically just a single shell script, plus a lookup table (see below). There's also a sample Automator quickaction workflow so you can run it from the Finder context menu.
 
-I personally put the `FOLSOM.sh` file at `~/Applications/`.
+I personally put the `FOLSOM.sh` file at `~/Applications/`. Whereever you put it, you'll need to run `chmod +x FOLSOM.sh` on it.
 
 The `FOLSOM_lookup.txt` should be placed in your home directory and renamed with a dot at the start, to `.FOLSOM_lookup.txt` and (again, details below).
 
@@ -47,5 +47,5 @@ I just a hobbyist with minimal coding experience. The code is **not** great... o
 1. Only set up for a (single) OneDrive Business account. It only scans through the `~/Library/Containers/com.microsoft.OneDrive-mac/Data/Library/Application Support/OneDrive/settings/Business1` folder.
 2. The method to force the final links to open in a Word/Excel/Powerpoint online editor (and not download the target file) is to append `?csf=1&web=1` at the end of the link. This works *most* of the time...
 3. There's no automatic way to populate the lookup table. From what I can tell, this *would* require accessing the OneDrive API. Currently this is done by hand.
-4. The lookup table method won't work if there are multiple shares with the same name. For example if you're syncing *Astrid Lindgren - Pippi draft* AND *Ozzy Osbourne - Pippi draft*.
+4. I'm not sure how this would work if your system isn't set to English. The OneDrive settings folder may have a different name, and the share folders may have a name that doesn't contain "Shared".
 5. Probably many others I haven't discovered yet...

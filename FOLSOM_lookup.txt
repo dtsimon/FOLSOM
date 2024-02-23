@@ -1,7 +1,7 @@
-# Sharepoint URL lookup table
-# Column 1: Sharename
-# Column separator: ;;;
-# Column 2: Intermediate path (between davUrlNamespace and relativePath)
+# FOLSOM Sharepoint URL lookup table
+# Column 1: Sharename (=$onedriveRootFolderLocal from FOLSOM.sh)
+# Column separator: ;;; (no spaces)
+# Column 2: Intermediate path (missing path between $davUrlNamespace and $relativePath)
 # NOTE: no starting slash, yes ending slash
 
 Sample share name;;;Intermediate/Path/
