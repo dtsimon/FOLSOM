@@ -15,7 +15,12 @@ inputPath=`readlink -f $1`
 # Check if the inputPath is synced through OneDrive
 # If it isn't, skip to the end... if it is, run the full script
 # 1. Get the OneDrive paths
-onedriveFileProviderPaths=`fileproviderctl listproviders | grep -E "OneDrive-mac" | sed "s|com.microsoft.OneDrive-mac.FileProvider|$HOME|g"`
+
+# !!!! fileproviderctl listprovider broken in macOS 14.4!!
+# onedriveFileProviderPaths=`fileproviderctl listproviders | grep -E "OneDrive-mac" | sed "s|com.microsoft.OneDrive-mac.FileProvider|$HOME|g"`
+# This solution is much slower as it requires a (even limited!) dump
+onedriveFileProviderPaths=`fileproviderctl dump --limit-dump-size -P | grep -F "com.apple.file-provider-domain-id:" | sort | uniq | grep -F "OneDrive-mac" | sed "s|.*OneDrive\-mac\.FileProvider|$HOME|g" `
+
 # 2. Convert the onedriveFileProviderPaths variable into an array
 onedriveFileProviderPathsArray=("${(@f)onedriveFileProviderPaths}")
 # 3. Get the original paths for the onedriveFileProviderPaths
