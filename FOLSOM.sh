@@ -9,6 +9,10 @@
 # https://github.com/dtsimon/FOLSOM
 # --------------------------------------------------------------------------------
 
+# Start by setting the clipboard. 
+# FOLSOM takes a few seconds, so set the clipboard to a short message explaining this.
+echo -n "FOLSOM is processing..." | pbcopy
+
 # The script is meant to start with a file path from a Finder action
 inputPath=`readlink -f $1`
 
