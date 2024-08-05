@@ -76,6 +76,7 @@ else
     onedriveRootSite=`echo $onedriveRootFolderLocal | sed 's/\ -\ .*//g'`
     onedriveRootShare=`echo $onedriveRootFolderLocal | sed 's/.*\ -\ //g'`
 fi
+
 # Get the relative path to the file past the root folder
 relativePath=`echo $localPathClean | sed "s|$onedriveRootFolderLocal/||g"`
 
@@ -110,6 +111,8 @@ fi
 # Generate the full share link
 fullShareLink=$davUrlNamespace$intermediatePath$relativePath"\?csf=1\&web=1"
 
+# DTSIMON possible issue: backslashes in fullShareLink \? \&
+
 # Generate HTML text for clipboard
 outputPath=`echo $myPathPrefix$localPathClean | sed 's|^/||g' | sed 's|/| > |g'`
 # replace "pathLastElement" (i.e. final file or folder) with
@@ -119,7 +122,11 @@ htmlOutputPath=`echo $outputPath | sed "s|$pathLastElement|<a href=\"$fullShareL
 fullHtmlOutput="<span style=\"font:Helvetica;font-size:9pt;\">"$htmlOutputPath"</span>"
 
 # Put the HTML text on the clipboard (via https://assortedarray.com/posts/copy-rich-text-cmd-mac/)
-echo $fullHtmlOutput | hexdump -ve '1/1 "%.2x"' | xargs printf "set the clipboard to {text:\" \", «class HTML»:«data HTML%s»}" | osascript -
+# THIS DOESN'T SEEM TO WORK ANYMORE
+# echo $fullHtmlOutput | hexdump -ve '1/1 "%.2x"' | xargs printf "set the clipboard to {text:\" \", «class HTML»:«data HTML%s»}" | osascript -
+
+# Try a new method to paste RTF to clipboard
+echo $fullHtmlOutput | textutil -format html -convert rtf -stdin -stdout | sed 's|\\froman\\fcharset0 Times-Roman|\\fswiss\\fcharset0 Helvetica|' | pbcopy -Prefer rtf
 
 # -------------------------------------------------------
 # END OF IS-ONEDRIVE IF SECTION
