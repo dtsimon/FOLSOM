@@ -126,7 +126,7 @@ fullHtmlOutput="<span style=\"font:Helvetica;font-size:9pt;\">"$htmlOutputPath"<
 # echo $fullHtmlOutput | hexdump -ve '1/1 "%.2x"' | xargs printf "set the clipboard to {text:\" \", «class HTML»:«data HTML%s»}" | osascript -
 
 # Try a new method to paste RTF to clipboard
-echo $fullHtmlOutput | textutil -format html -convert rtf -stdin -stdout | sed 's|\\froman\\fcharset0 Times-Roman|\\fswiss\\fcharset0 Helvetica|' | pbcopy -Prefer rtf
+echo $fullHtmlOutput | textutil -format html -convert rtf -inputencoding UTF-8 -encoding UTF-8 -stdin -stdout | sed 's|\\froman\\fcharset0 Times-Roman|\\fswiss\\fcharset0 Helvetica|' | pbcopy -Prefer rtf
 
 # -------------------------------------------------------
 # END OF IS-ONEDRIVE IF SECTION
