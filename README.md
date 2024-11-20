@@ -15,6 +15,8 @@ The `FOLSOM_lookup.txt` should be placed in your home directory and renamed with
 
 You can create your own Automator quick action or modify the one included here. Read [Apple's guide to Automator quick actions here](https://support.apple.com/en-gb/guide/automator/aut73234890a/mac).
 
+**NOTE:** If you run FOLSOM through an Automator quick action through Finder, you need to give Finder "Full Disk Access" in Settings > Privacy & Security. This is because Automator actions inherit the permissions of the app they're run from.
+
 ## The lookup table
 URLs to files that are synced through "sites" (group Sharepoint sites, Teams, etc.) are pretty easy to construct with OneDrives local data. But files synced through someone else's (i.e., not your) OneDrive are harder to deal with. There's an intermediate part of the URL that OneDrive doesn't seem to store locally (in an easy, non-API way to deal with). For example:
 `https://company.sharepoint.com/personal/username/Documents/[INTERMEDIATE PATH]/Word_document.docx?csf=1&web=1`
