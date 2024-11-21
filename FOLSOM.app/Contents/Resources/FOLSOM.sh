@@ -16,6 +16,7 @@ echo -n "FOLSOM is processing..." | pbcopy
 # The script is meant to start with a file path from a Finder action
 #inputPath=`readlink -f $@`
 inputPath=`cat ~/.FOLSOM_lookup_input`
+rm ~/.FOLSOM_lookup_input
 
 # Check if the inputPath is synced through OneDrive
 # If it isn't, skip to the end... if it is, run the full script
@@ -86,11 +87,6 @@ cd ~/"Library/Containers/com.microsoft.OneDrive-mac/Data/Library/Application Sup
 libraryScope=`grep -E "^libraryScope.*\s5\s\"$onedriveRootSite\"\s" *.ini | sed "s|.*\"$onedriveRootSite\"||g" | awk '{print $3}'  | sed 's/\"//g'`
 davUrlNamespace=`grep -hF $libraryScope *.ini | grep -E "DavUrlNamespace" | sed 's|DavUrlNamespace = ||g'`
 userName=`grep -E "MySite" *.ini | sed "s|.*personal/||g" | sed "s|\"\ .*||g"`
-
-echo "onedriveRootSite = "$onedriveRootSite >> ~/Desktop/FOLSOM.log
-echo "libraryScope = "$libraryScope >> ~/Desktop/FOLSOM.log
-echo "davUrlNamespace = "$davUrlNamespace >> ~/Desktop/FOLSOM.log
-echo "userName = "$userName >> ~/Desktop/FOLSOM.log
 
 # Check if the Sharepoint URL is a "site" (Team or Sharepoint) or "personal" (user's OneDrive)
 if [[ $davUrlNamespace == *"personal"* ]] && [[ "$davUrlNamespace" != *$userName* ]]; then
