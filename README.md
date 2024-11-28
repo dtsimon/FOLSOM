@@ -9,13 +9,17 @@ FOLSOM uses information that OneDrive stores locally on your Mac to generate sha
 ## INSTALL and how to use
 FOLSOM is basically just a single shell script, plus a lookup table (see below). There's also a sample Automator quickaction workflow so you can run it from the Finder context menu.
 
-I personally put the `FOLSOM.sh` file at `~/Applications/`. Whereever you put it, you'll need to run `chmod +x FOLSOM.sh` on it.
+FOLSOM requires access to some files and folders and doesn't work if run directly from an Automator quickaction. For this reason, it's packaged inside an AppleScript app (FOLSOM.app). This is simply a wrapper to run the FOLSOM.sh file packaged inside the .app. I understand this is a roundabout way to run a shell script, but the only other option is to grant Finder total disk access, which may not be safe.
+
+I personally put the `FOLSOM.app` file at `~/Applications/`. 
 
 The `FOLSOM_lookup.txt` should be placed in your home directory and renamed with a dot at the start, to `.FOLSOM_lookup.txt` and (again, details below).
 
 You can create your own Automator quick action or modify the one included here. Read [Apple's guide to Automator quick actions here](https://support.apple.com/en-gb/guide/automator/aut73234890a/mac).
 
-**NOTE:** If you run FOLSOM through an Automator quick action through Finder, you need to give Finder "Full Disk Access" in Settings > Privacy & Security. This is because Automator actions inherit the permissions of the app they're run from.
+The Automator quick action included here takes the currently selected file in Finder, drops its path as text in the temporary file `~/.FOLSOM_lookup_input`, and runs the FOLSOM.app, which reads the temp file, then deletes it.
+
+The first time you run FOLSOM, it is likely to prompt you about file/folder permissions. Agree to these if you want it to work!
 
 ## The lookup table
 URLs to files that are synced through "sites" (group Sharepoint sites, Teams, etc.) are pretty easy to construct with OneDrives local data. But files synced through someone else's (i.e., not your) OneDrive are harder to deal with. There's an intermediate part of the URL that OneDrive doesn't seem to store locally (in an easy, non-API way to deal with). For example:
