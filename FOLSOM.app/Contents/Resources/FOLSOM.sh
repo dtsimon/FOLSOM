@@ -16,7 +16,6 @@ echo -n "FOLSOM is processing..." | pbcopy
 # The script is meant to start with a file path from a Finder action
 #inputPath=`readlink -f $@`
 inputPath=`cat ~/.FOLSOM_lookup_input`
-rm ~/.FOLSOM_lookup_input
 
 # Check if the inputPath is synced through OneDrive
 # If it isn't, skip to the end... if it is, run the full script
@@ -110,8 +109,22 @@ if [[ $davUrlNamespace == *"personal"* ]] && [[ "$davUrlNamespace" != *$userName
     intermediatePath=`grep -F $onedriveRootFolderLocal ~/.FOLSOM_lookup.txt | sed "s|$onedriveRootFolderLocal;;;||g"`
 fi
 
+# Check if the Finder-synced folder is part of a General channel in Teams
+addGeneral=""
+if [[ $onedriveRootFolderLocal == *" - General" ]]; then
+    addGeneral="General/"
+fi
+
+# Debugging. Uncomment these lines for debugging purposes
+# echo "onedriveRootFolderLocal: "$onedriveRootFolderLocal
+# echo "libraryScope: "$libraryScope
+# echo "davUrlNamespace: "$davUrlNamespace
+# echo "intermediatePath: "$intermediatePath
+# echo "addGeneral: "$addGeneral
+# echo "relativePath: "$relativePath
+
 # Generate the full share link
-fullShareLink=$davUrlNamespace$intermediatePath$relativePath"\?csf=1\&web=1"
+fullShareLink=$davUrlNamespace$addGeneral$intermediatePath$relativePath"\?csf=1\&web=1"
 
 # DTSIMON possible issue: backslashes in fullShareLink \? \&
 
